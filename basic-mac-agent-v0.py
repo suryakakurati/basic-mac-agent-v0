@@ -17,7 +17,7 @@ import requests
 import time
 import numpy as np
 import sounddevice as sd
-import whisper
+import mlx_whisper as whisper
 
 from pynput import keyboard
 from AppKit import (
@@ -44,7 +44,8 @@ GEMINI_MODEL    = "gemini-3.1-flash-lite-preview"
 GEMINI_URL      = "https://generativelanguage.googleapis.com/v1beta/models"
 
 # Audio / transcription settings
-WHISPER_MODEL   = "base"        # tiny | base | small
+WHISPER_MODEL = "mlx-community/whisper-base.en-mlx"
+
 SAMPLE_RATE     = 16000         # Hz, required by Whisper
 
 # Input settings
@@ -107,7 +108,7 @@ Close App: Spotify"""
 # ── WHISPER SETUP ─────────────────────────────────────────────────────────────
 
 print("Loading Whisper model...")
-_whisper_model = whisper.load_model(WHISPER_MODEL)
+# _whisper_model = whisper.load_model(WHISPER_MODEL)
 print("Whisper ready.")
 
 
@@ -170,7 +171,8 @@ def query_ollama(user_input: str) -> str:
         "model": OLLAMA_MODEL,
         "prompt": SYSTEM_PROMPT + "\n\nUser: " + user_input,
         "stream": False,
-        "options": {"temperature": 0.1}
+        "options": {"temperature": 0.1},
+        "keep_alive": "2m"
     }
     try:
         res = requests.post(OLLAMA_URL, json=payload, timeout=30)
@@ -444,7 +446,7 @@ def stop_recording_and_process():
 
     def process():
         # Step 1: transcribe
-        result = _whisper_model.transcribe(audio, fp16=False)
+        result = whisper.transcribe(audio, path_or_hf_repo=WHISPER_MODEL) 
         transcript = result["text"].strip()
         print("HEARD:", transcript)
 
