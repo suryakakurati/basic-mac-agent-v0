@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-JARVIS - Voice Activated Mac Assistant
+Basic Mac Agent V0 - Voice Activated Mac Assistant
 Hold right shift → speak → release → Whisper transcribes → LLM → macOS actions
 
 Architecture:
@@ -25,7 +25,7 @@ from AppKit import (
     NSApplicationActivationPolicyAccessory
 )
 from Foundation import NSObject
-from objc import super as objc_super
+# from objc import super as objc_super  # unused import
 
 
 # ── CONFIG ────────────────────────────────────────────────────────────────────
