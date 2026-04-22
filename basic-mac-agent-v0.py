@@ -375,8 +375,10 @@ def parse_and_execute(llm_output: str):
             open_folder(path)
 
         elif line.startswith("Run Terminal:"):
-            command = line[len("Run Terminal:"):].strip()
-            run_terminal_command(command)
+            # command = line[len("Run Terminal:"):].strip()
+            # run_terminal_command(command) 
+            # no safe handling implemented here. will come in later version.
+            return
 
         elif line.startswith("Close App:"):
             apps = line[len("Close App:"):].split(",")
