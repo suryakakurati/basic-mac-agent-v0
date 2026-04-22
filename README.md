@@ -56,9 +56,6 @@ Configuration variables are defined at the top of `basic-mac-agent-v0.py`:
 
 1. Clone or download the repository
 2. Install dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
 3. For Ollama backend: Install and start Ollama, pull the required model
 4. For Gemini backend: Obtain an API key and set `GEMINI_API_KEY`
 5. Run the assistant:
