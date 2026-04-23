@@ -2,6 +2,8 @@
 
 **Note: This project is currently incomplete and may not function as intended. It is a work-in-progress implementation of a voice-controlled assistant for macOS.**
 
+The codebase is now modularized into separate modules for better maintainability: `config.py` (settings), `context.py` (macOS state queries), `llm.py` (LLM integration), `actions.py` (macOS commands), `parser.py` (command processing), `audio.py` (recording/transcription), and `main.py` (entry point).
+
 ## Overview
 
 basic-mac-agent-v0 is a voice-activated personal assistant for macOS that allows users to control their computer through natural speech commands. By holding the right shift key, speaking a command, and releasing the key, the assistant transcribes the audio using Whisper, interprets the intent using a large language model (LLM), and executes macOS actions via AppleScript and subprocess calls.
@@ -34,7 +36,7 @@ The assistant supports two LLM backends:
 - **Ollama** (local, recommended): Requires Ollama running locally
 - **Gemini** (cloud): Requires API key
 
-Configuration variables are defined at the top of `basic-mac-agent-v0.py`:
+Configuration variables are defined in `config.py`:
 
 - `LLM_BACKEND`: "ollama" or "gemini"
 - `OLLAMA_MODEL`: Model name for Ollama
@@ -60,7 +62,7 @@ Configuration variables are defined at the top of `basic-mac-agent-v0.py`:
 4. For Gemini backend: Obtain an API key and set `GEMINI_API_KEY`
 5. Run the assistant:
    ```
-   python3 basic-mac-agent-v0.py
+   python3 main.py
    ```
 
 ### Dependencies
@@ -74,7 +76,7 @@ Configuration variables are defined at the top of `basic-mac-agent-v0.py`:
 
 ## Usage
 
-1. Start the script: `python3 basic-mac-agent-v0.py`
+1. Start the script: `python3 main.py`
 2. Hold the right shift key
 3. Speak a command (e.g., "open Spotify", "open youtube.com", "play lofi music")
 4. Release the shift key
